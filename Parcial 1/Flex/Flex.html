@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <style>
+     *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .contenedor
+        {
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            align-items: center;
+
+        }
+        .caja
+        {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(245, 183, 230);
+            border: 1px solid rgb(124, 239, 247);
+
+        }
+        /*#caja2{
+            align-self: flex-start;
+        }*/
+
+        #caja1 {flex-grow: 1;}
+        #caja2 {flex-grow: 2;}
+        #caja3 {flex-grow: 1;}
+        #caja4 {flex-grow: 1;}
+ </style>
+</head>
+<body>
+    <div class ="contenedor">
+        <div id = "caja 1" class = "caja">Caja1</div>
+        <div id = "caja 2" class = "caja">Caja2</div>
+        <div id = "caja 3" class = "caja">Caja3</div>
+        <div id = "caja 4" class = "caja">Caja4</div>
+        
+</body>
