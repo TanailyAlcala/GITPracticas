@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title></head>
+    <title>Document</title>
 
         <STYLE>
             *{
@@ -16,8 +16,8 @@
             {
                 border:4px solid rgb(112, 169, 216);
                 background-color: rgb(255, 145, 240);
-                color: lightseagreen;
-                position: absolute;
+                /*color: lightseagreen;
+                position: absolute;*/
                 height: 20%;
                 width: 100%;
             }
@@ -43,42 +43,53 @@
 
             #content
             {
+                left:40%;
                 width: 60%;
             }
+
+            .submenu
+            {
+                display: none;
+            }
+
+            li.opcion:hover .submenu
+            {
+                display:block;
+                padding-left: 2em;
+                list-style-type: none;
+            }
         </STYLE>
-        
+ <head>       
 <body>
-    <div class = "cont" id= "header">header</div>
-    <div class = "cont" id= "sidebar">
+    <div class = "cont" id= "header">HEADER</div>
+    <div class = "cont" id= "sidebar">SIDEBAR
         <ul>
-            <li>Opcion1
-                <ul>
-                    <li>Opcion 1-1</li>
-                    <li>Opcion 1-2</li>
-                    <li>Opcion 1-3</li>
+            <li class="opcion">Opción1
+                <ul class="submenu">
+                    <li>Opción 1-1</li>
+                    <li>Opción 1-2</li>
+                    <li>Opción 1-3</li>
                 </ul>
             </li>
 
-            <li>Opcion2
-                <ul>
-                    <li>Opcion 2-1</li>
-                    <li>Opcion 2-2</li>
-                    <li>Opcion 2-3</li>
+            <li class="opcion">Opción2
+                <ul class="submenu">
+                    <li>Opción 2-1</li>
+                    <li>Opción 2-2</li>
+                    <li>Opción 2-3</li>
                 </ul>
             </li>
 
-            <li>Opcion3
-                <ul>
-                    <li>Opcion 3-1</li>
-                    <li>Opcion 3-2</li>
-                    <li>Opcion 3-3</li>
+            <li class="opcion">Opción3
+                <ul class="submenu">
+                    <li>Opción 3-1</li>
+                    <li>Opción 3-2</li>
+                    <li>Opción 3-3</li>
                 </ul>
             </li>
-
         </ul>
-        sidebar</div>
-    <div class = "cont" id= "content">content</div>
+    </div>
+    <div class = "cont" id= "content">CONTENT</div>
     
 </body>
-
 </html>
