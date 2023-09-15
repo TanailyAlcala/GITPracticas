@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .caja
+        {
+            width: calc(100% / 3 - 20px);
+            height: 100px;
+            background-color: rgb(245, 183, 230);
+            border: 5px solid rgb(124, 239, 247);
+            float: left;
+            margin: 10px;
+
+        }
+        /*#caja1:hover
+        {
+            transform:rotate(45deg);
+        }
+        #caja2:hover
+        {
+            transform: skewY(45deg);
+        }
+        #caja3:hover
+        {
+            transform: skew(50deg);
+
+        }*/
+        @media screen and (min-width:400px) and (max-width:900px)
+        {
+            #caja1,#caja2,#caja3
+            {   
+            width: calc(100% / 3 - 20px);
+            }
+            
+            #caja4
+            {
+                clear:left;
+                width: calc(100% - 20px);
+            }
+        }
+
+        @media screen and (max-width:399px)
+        {
+            #caja1,
+            #caja2,
+            #caja3
+            {clear:left;
+                width: calc(100% - 20px);
+
+            }
+
+        }
+    
+    </style>
+</head>
+<body>
+    <div class ="contenedor">
+        <div id= "caja1" class = "caja"></div>
+        <div id="caja2" class = "caja"></div>
+        <div id ="caja3" class = "caja"></div>
+        <div id ="caja4" class = "caja"></div>
+        
+</body>
