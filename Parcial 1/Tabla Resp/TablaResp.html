@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+           *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+table
+{
+    width: 100%;
+}
+
+table, thead,tbody, tr, th, td
+{
+    border: 2px solid plum;
+    border-collapse: collapse;
+}
+tbody td:nth-child(even){
+    background-color: blueviolet;
+}
+@media screen and (max-width:600px)
+{
+    table, thead,tbody, tr, th, td
+{
+    display:block;
+}
+thead{
+    display:none;
+}
+td{
+    padding-left: 50%;
+}
+
+td:nth-child(1){ padding-left:0; text-align: center; background-color: rgba(163, 241, 241, 0.986);}
+td:nth-child(2)::before{ content:"Lunes";position:absolute; left: 10px;}
+td:nth-child(3)::before{ content:"Martes";position:absolute; left: 10px;}
+td:nth-child(4)::before{ content:"Miercoles";position:absolute; left: 10px;}
+td:nth-child(5)::before{ content:"Jueves";position:absolute; left: 10px;}
+td:nth-child(6)::before{ content:"Viernes";position:absolute; left: 10px;}
+}
+      
+    </style>
+
+</head>
+
+<body>
+       
+<table>
+    <thead>
+        <tr>
+            <th>--</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miercoles</th>
+            <th>Jueves</th>
+            <th>Vierves</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7am-8am</td>
+            <td>ProgWeb</td>
+            <td>ProgWeb</td>
+            <td>ProgWeb</td>
+            <td>ProgWeb</td>
+            <td>ProgWeb</td>
+        </tr>
+        <tr>
+            <td>8am-9am</td>
+            <td>--</td>
+            <td>Arq.Computadoras</td>
+            <td>Sist.Operativos</td>
+            <td>Arq.Computadoras</td>
+            <td>Sist.Operativos</td>
+        </tr>
+        <tr>
+            <td>9am-10am</td>
+            <td>Arq.Computadoras</td>
+            <td>Arq.Computadoras</td>
+            <td>Sist.Operativos</td>
+            <td>Arq.Computadoras</td>
+            <td>Sist.Operativos</td>
+        </tr>
+        <tr>
+            <td>10am-11am</td>
+            <td>Simulación</td>
+            <td>Simulación</td>
+            <td>Simulación</td>
+            <td>Simulación</td>
+            <td>Simulación</td>
+        </tr>
+        <tr>
+            <td>11am-12pm</td>
+            <td>--</td>
+            <td>--</td>
+            <td>--</td>
+            <td>--</td>
+            <td>--</td>
+        </tr>
+        <tr>
+            <td>12pm-1pm</td>
+            <td>Telecomunicaciones</td>
+            <td>--</td>
+            <td>Telecomunicaciones</td>
+            <td>--</td>
+            <td>--</td>
+        </tr>
+        <tr>
+            <td>1pm-2pm</td>
+            <td>Telecomunicaciones</td>
+            <td>--</td>
+            <td>Telecomunicaciones</td>
+            <td>--</td>
+            <td>--</td>
+        </tr>
+        <tr>
+            <td>2pm-3pm</td>
+            <td>TallerBD</td>
+            <td>TallerBD</td>
+            <td>TallerBD</td>
+            <td>TallerBD</td>
+            <td>--</td>
+        </tr>
+  </tbody>
+</table>
+</body>
+
+</html>
