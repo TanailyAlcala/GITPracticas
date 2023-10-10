@@ -8,7 +8,7 @@ let a=areas.areaCuadrado(4);
 console.log(a);
 
 
-let t=areas.areatriangulo(4,8);
+let t=areas.areaTriangulo(4,8);
 console.log(t);
 
 

@@ -18,8 +18,8 @@ function IMC(peso, estatura)
     return (peso/(estatura*estatura));
 }
 
-module.exports.areacuadrado=areacuadrado;
-module.exports.areatriangulo=areatriangulo;
+module.exports.areaCuadrado=areaCuadrado;
+module.exports.areaTriangulo=areaTriangulo;
 module.exports.multiplicacion=multiplicacion;
 module.exports.IMC=IMC;
 
