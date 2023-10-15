@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin:0;
+            padding: 0;
+        }
+        .contenedor{
+            height: 100vh;
+            width: 100vw;
+            background-color: rgb(208, 231, 245);
+            display: grid;
+            grid-template-columns: 200px 200px 200px;
+            grid-template-rows: 200px 200px 200px;
+            justify-content: center;
+            align-items: center;
+            justify-items: stretch;
+        }
+        .caja{
+            width: 200px;
+            height:200px;
+            background-color: rgb(226, 250, 132);
+            border:2px solid rgb(192, 63, 218);
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .caja img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; 
+            object-position: center center; 
+        }
+
+        #caja1{
+            grid-column-start: 1;
+            grid-column-end: 3;
+            align-self: start;
+            
+        }
+
+        #Caja11{
+            align-self: center;
+            justify-self: center;
+        }
+
+        #mensajeGanador {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(210, 249, 56, 0.877); 
+        padding: 20px;
+        border: 2px solid hsl(252, 84%, 54%); 
+        display: none;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <div id="cont" class="contenedor">
+        <div id="Caja1" class="caja"><img src="https://cdn.myportfolio.com/ab0a3d540be46400178d78e1438832f0/22982d15-1499-4b97-a9f7-10b868f978f0_rw_1200.jpg?h=1f7b0746e1bf0e914ba49404db040ebd" alt="X"></div>
+        <div id="Caja2" class="caja"><img src="https://st2.depositphotos.com/1001911/5251/v/450/depositphotos_52510977-stock-illustration-cartoon-moon.jpg" alt="O"></div>
+        <div id="Caja3" class="caja"><img src="https://cdn.myportfolio.com/ab0a3d540be46400178d78e1438832f0/22982d15-1499-4b97-a9f7-10b868f978f0_rw_1200.jpg?h=1f7b0746e1bf0e914ba49404db040ebd" alt="X"></div>
+        <div id="Caja4" class="caja"><img src="https://st2.depositphotos.com/1001911/5251/v/450/depositphotos_52510977-stock-illustration-cartoon-moon.jpg" alt="O"></div>
+        <div id="Caja5" class="caja"><img src="https://cdn.myportfolio.com/ab0a3d540be46400178d78e1438832f0/22982d15-1499-4b97-a9f7-10b868f978f0_rw_1200.jpg?h=1f7b0746e1bf0e914ba49404db040ebd" alt="X"></div>
+        <div id="Caja6" class="caja"><img src="https://st2.depositphotos.com/1001911/5251/v/450/depositphotos_52510977-stock-illustration-cartoon-moon.jpg" alt="O"></div>
+        <div id="Caja7" class="caja"><img src="https://cdn.myportfolio.com/ab0a3d540be46400178d78e1438832f0/22982d15-1499-4b97-a9f7-10b868f978f0_rw_1200.jpg?h=1f7b0746e1bf0e914ba49404db040ebd" alt="X"></div>
+        <div id="Caja8" class="caja"><img src="https://st2.depositphotos.com/1001911/5251/v/450/depositphotos_52510977-stock-illustration-cartoon-moon.jpg" alt="O"></div>
+        <div id="Caja9" class="caja"><img src="https://cdn.myportfolio.com/ab0a3d540be46400178d78e1438832f0/22982d15-1499-4b97-a9f7-10b868f978f0_rw_1200.jpg?h=1f7b0746e1bf0e914ba49404db040ebd" alt="X"></div>
+
+        <button id="reiniciar" type="button">Reiniciar</button> 
+
+        <div id="mensajeGanador" style="display: none;"></div>
+
+    </div>
+    
+
+    <script>
+        var xo = "X";
+        var ganador = false;
+
+        var juegoTerminado = false;
+
+
+        var mensajeGanador = document.getElementById("mensajeGanador");
+
+        function verificarGanador(tablero, jugador) {
+            const combinacionesGanadoras = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],  // F
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],  // C
+                [0, 4, 8], [2, 4, 6]             // D
+            ];
+
+            for (const combinacion of combinacionesGanadoras) {
+                const [a, b, c] = combinacion;
+                if (tablero[a].querySelector("img")?.alt === jugador &&
+                    tablero[b].querySelector("img")?.alt === jugador &&
+                    tablero[c].querySelector("img")?.alt === jugador) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+  
+        document.getElementById("cont").addEventListener("click", function (e) {
+
+            if (juegoTerminado) {
+                return; // no permite mas jugadas
+            }
+
+            if (ganador) {
+                return;
+            }
+            if (e.target.classList.contains("caja") && !e.target.querySelector("img")) {
+                var img = document.createElement("img");
+                img.src = xo === "X" ? "https://cdn.myportfolio.com/ab0a3d540be46400178d78e1438832f0/22982d15-1499-4b97-a9f7-10b868f978f0_rw_1200.jpg?h=1f7b0746e1bf0e914ba49404db040ebd" : "https://st2.depositphotos.com/1001911/5251/v/450/depositphotos_52510977-stock-illustration-cartoon-moon.jpg";
+                img.alt = xo;
+                e.target.appendChild(img);
+                xo = xo === "X" ? "O" : "X";
+
+                if (verificarGanador(document.getElementsByClassName("caja"), xo)) {
+                    mensajeGanador.textContent = xo + " ha ganado la partida. Reinicia para volver a jugar...";
+                    mensajeGanador.style.display = "block";
+                    ganador = true;
+                    juegoTerminado = true; 
+                }
+            }
+        });
+
+        document.getElementById("reiniciar").addEventListener("click", function () {
+            let cajas = document.getElementsByClassName("caja");
+            for (const elemento of cajas) {
+                elemento.innerHTML = "";
+            }
+            xo = "X"; // Restablecer el turno
+            ganador = false;
+            juegoTerminado = false; // Habilitar el juego nuevamente
+            mensajeGanador.style.display = "none";
+        });
+    
+    </script>
+</body>
+</html>
