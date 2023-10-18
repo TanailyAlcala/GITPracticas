@@ -4,26 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        .styled-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+    
+        .styled-table th, .styled-table td {
+            border: 1px solid #7afe6b;
+            padding: 8px;
+            text-align: left;
+        }
+    
+        .styled-table th {
+            background-color: #4bcbe4;
+        }
+    
+        .styled-table tr:nth-child(even) {
+            background-color: #e94ede;
+        }
+    </style>
+    
+
 </head>
 <body>
     <div id="contenedor"></div>
 
     <script>
-        let encabezados=['Nombre', 'ApellidoP', 'ApellidoM'];
+        let table = document.createElement("table");
+        table.classList.add("styled-table"); 
+
+
+        let encabezados=['Artista', 'Canción', 'Álbum'];
 
         //let tab = document.createElement("table");
         let datos =[{
-            nombre:"Tanaily",
-            apellidoP:"Alcalá",
-            apellidoM:"Barraza"
+            nombre:"Rauw Alejandro",
+            apellidoP:"Hoy Aquí",
+            apellidoM:"Playa Saturno"
         },
-        {nombre:"Nora",
-            apellidoP:"Rodriguez",
-            apellidoM:"Lopez"
+        {nombre:"Latin Mafia",
+            apellidoP:"Julieta",
+            apellidoM:"Julietota"
         },
-        {nombre:"Jose",
-            apellidoP:"Roberto",
-            apellidoM:"Carrizales"
+        {nombre:"Sabrina Carpenter",
+            apellidoP:"Nonsense",
+            apellidoM:"Emails I can't send"
         }];
 
         let tab = document.createElement("table");
@@ -61,7 +88,34 @@
         });
 
          tab.appendChild(tbody);
-        
+
+        //****
+        // Estilos para la tabla
+        tab.style.border = '1px solid #ccc';
+        tab.style.borderCollapse = 'collapse';
+        tab.style.width = '100%';
+
+        // Estilos encabezado
+        let thElements = document.querySelectorAll("thead th");
+        thElements.forEach(th => {
+        th.style.backgroundColor = '#333';
+        th.style.color = 'white';
+        th.style.padding = '10px';
+        th.style.textAlign = 'left';
+        });
+
+        // Estilos celdas 
+        let tdElements = document.querySelectorAll("tbody td");
+        tdElements.forEach(td => {
+        td.style.border = '1px solid #ccc';
+        td.style.padding = '10px';
+        });
+
+        // Estilos filas 
+        let rows = document.querySelectorAll("tbody tr:nth-child(odd)");
+        rows.forEach(row => {
+        row.style.backgroundColor = '#f2f2f2';
+        });
 
         document.getElementById("contenedor").appendChild(tab);
 
