@@ -32,6 +32,7 @@
     </style>    
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -47,6 +48,7 @@
     <script>
         document.getElementById("btn1").addEventListener("click", function () {
             const xhr = new XMLHttpRequest();
+            console.log("XMLHTTPREQUEST");
             /*if (this.readyState === 4 && this.status === 200) {*/
             xhr.addEventListener("load", function () {
                 if (this.readyState === this.DONE) {
@@ -62,19 +64,22 @@
         });
 
         document.getElementById("btn2").addEventListener("click", () => {
+            console.log("FETCH")
             fetch("https://api.waifu.pics/sfw/cry")
                 .then(response => response.json())
                 .then(data => document.getElementById("img").src = data.url);
         });
 
         document.getElementById("btn3").addEventListener("click", async () => {
+            console.log("ASYNC/AWAIT");
 
             let objRespuesta = await fetch("https://api.waifu.pics/sfw/cry");
             let datoJson = await objRespuesta.json();
-            document.getElementById("img").src = datoJson.value
+            document.getElementById("img").src = datoJson.url
         });
 
-        document.getElementById("btn4").addEventListener("click", async () => {
+        document.getElementById("btn4").addEventListener("click",() => {
+            console.log("AXIOS");
             axios({
                 method: 'get',
                 url: 'https://api.waifu.pics/sfw/cry',
@@ -82,17 +87,18 @@
             })
                 .then(function (datoJson) {
                     console.log(datoJson);
-                    document.getElementById("img").src = datoJson.data.value
+                    document.getElementById("img").src = datoJson.data.url;
                 });
         });
         
-        $(document).ready(function () {
+        
             document.getElementById("btn5").addEventListener("click", () => {
+                console.log("JQUERY")
                 $.getJSON("https://api.waifu.pics/sfw/cry", function (datoJson) {
-                    document.getElementById("img").src = datoJson.value
+                    document.getElementById("img").src = datoJson.url
                 });
             });
-        });
+        
     </script>
 </body>
 </html>
