@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 
     <style>
         
@@ -39,7 +40,6 @@
     background-color: rgb(232, 232, 43); 
     padding: 10px; 
     }
-
     </style>
 </head>
 
@@ -52,28 +52,28 @@
 
     <select id="categorias"></select>
     <button id="Peticion">Mostrar</button>
-    <p id="broma"></p>
     
     <script>
         fetch("https://api.chucknorris.io/jokes/categories")
             .then(respuesta => respuesta.json())
-            .then(dato => {
-                dato.forEach(c=>{
+            .then(function (dato) {
+
+                dato.forEach(function (categoria) {
                     let opc = document.createElement("option");
-                    opc.value = c;
-                    opc.innerText = c;
+                    opc.value = categoria;
+                    opc.innerText = categoria;
                     document.getElementById("categorias").appendChild(opc);
-                });
-            });
+                })
+
+            })
 
             document.getElementById("Peticion").addEventListener("click", () => {
             let option = document.getElementById("categorias").value;
 
             fetch(`https://api.chucknorris.io/jokes/random?category=${option}`)
-                .then(respuesta => respuesta.json())
-                .then(function (dato) {
-                    document.getElementById("broma").innerText = dato.value;
-                    //alert(dato.value);
+                 .then(respuesta => respuesta.json())
+                 .then(function (dato) {
+                 console.log(dato.value);
                 })
             .catch(function (error) {
                 console.error("Error al obtener la broma:", error);
