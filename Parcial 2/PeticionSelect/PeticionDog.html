@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        
+    #Peticion {
+    background-color: rgb(233, 85, 198);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    }
+    
+    body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('https://i.pinimg.com/originals/c4/7c/fe/c47cfe0e2434240e3b6aa3e3586ed152.png'); 
+    background-size: cover;
+    }
+
+    header {
+    text-align: center;
+    }
+
+    #razas, #Peticion, #imagenPerro {
+    margin: 10px; 
+    }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <h1> Razas de Perros</h1>
+        <p>Selecciona una opción...</p>
+    </header>
+
+    <select id="razas"></select>
+    <button id="Peticion">Mostrar</button>
+    <img id="imagenPerro">
+    
+    <script>
+        fetch("https://dog.ceo/api/breeds/list/all")
+            .then(respuesta => respuesta.json())
+            .then(function (dato) {
+
+                for (const propiedad in dato.message) {
+                    if (Object.hasOwnProperty.call(dato.message, propiedad)) {
+                        let opc = document.createElement("option");
+                        opc.value = propiedad;
+                        opc.innerText = propiedad;
+                        document.getElementById("razas").appendChild(opc);
+                    }
+                }
+            })
+
+        document.getElementById("Peticion").addEventListener("click", () => {
+            let option = document.getElementById("razas").value;
+
+            fetch(`https://dog.ceo/api/breed/${option}/images/random`)
+                .then(respuesta => respuesta.json())
+                .then(function (dato) {
+                    let img = document.getElementById("imagenPerro"); 
+                    img.src = dato.message;
+                })
+        })
+    </script>
+</body>
+</html>
