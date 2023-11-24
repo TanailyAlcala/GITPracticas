@@ -5,6 +5,7 @@ const cors = require('cors');
 
 
 
+
 const connection = mysql.createConnection({
     host: 'localhost', 
     port: '3306',
@@ -13,22 +14,23 @@ const connection = mysql.createConnection({
     database: 'PRACTICA1'
 });
 
+app.use(cors());
 
-app.get('/usuarios', (req, res) =>{
+app.get('/canciones1', (req, res) =>{
 
-console.log(req.query.ID_USUARIO);
+console.log(req.query.id_cancion);
 
 let consulta='';
 
-if(typeof(req.query.ID_USUARIO)=='undifined'){
-consulta = 'select * from usuarios';
+if(typeof(req.query.id_cancion)=='undifined'){
+consulta = 'select * from canciones1';
 } else {
-        consulta = `select * from usuarios where ID_USUARIO = ${req.query.ID_USUARIO}`
+        consulta = `select * from canciones1 where id_cancion = ${req.query.id_cancion}`
         }
         console.log(consulta);
 
     connection.query(
-    'SELECT * FROM usuarios',
+    'SELECT * FROM canciones1',
     function(err, results, fields) {
         if(results.leght==0){
              res.json(results);

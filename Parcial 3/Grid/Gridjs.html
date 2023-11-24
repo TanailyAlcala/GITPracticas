@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>GridJS</title>
+  <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div id="wrapper"></div>
+  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+  <script>
+    const grid = new gridjs.Grid({
+      columns: ['ID', 'NOMBRE DE CANCION', 'ARTISTA', 'GENERO', 'DISCO', 'AÑO DE LANZAMIENTO'],
+      server: {
+        url: 'http://localhost:8082/canciones1',
+        then: data => data.map(canciones1 => [canciones1.id_cancion, canciones1.nombre_cancion, canciones1.artista, canciones1.genero, canciones1.disco, canciones1.año_lanzamiento])
+      }
+    }).render(document.getElementById("wrapper"));
+
+  </script>
+</body>
+</html>
