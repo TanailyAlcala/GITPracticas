@@ -102,67 +102,7 @@ app.delete('/canciones1', async (req, res) => {
     }
 });
 
-/*app.post('/canciones1', upload.none(), async (req, res) => {
-    const { nombre_cancion, artista, genero, disco, año_lanzamiento } = req.body;
 
-    if (!nombre_cancion || !artista || !genero || !disco || !año_lanzamiento) {
-        return res.status(400).json({ error: "Todos los campos son obligatorios: nombre de la cancion, artista, genero, disco, año de lanzamiento." });
-    }
-
-    if (isNaN(año_lanzamiento)) {
-        return res.status(400).json({ error: "El año de lanzamiento debe ser un número." });
-    }
-
-    try {
-        const connection = await pool.getConnection();
-        const [result] = await connection.execute(
-            `INSERT INTO canciones1 (nombre_cancion, artista, genero, disco, año_lanzamiento) VALUES (?, ?, ?, ?, ?)`,
-            [nombre_cancion, artista, genero, disco, año_lanzamiento]
-        );
-        connection.release();
-
-        res.json(result);
-    } catch (error) {
-        res.status(500).json({ error: "Error al agregar la canción." });
-    }
-});*/
-/*app.post('/canciones1', (req,res)=>{
-    const nombre_cancion = req.body.nombre_cancion;
-    const artista = req.body.artista;
-    const genero = req.body.genero;
-    const disco = req.body.disco;
-    const año_lanzamiento = req.body.año_lanzamiento;
-
-    const script = `INSERT INTO canciones1 (nombre_cancion, artista, genero, disco, año_lanzamiento) VALUES ('${nombre_cancion}', '${artista}', '${genero}', '${disco}', '${año_lanzamiento}')`;
-
-    connection.query(script, function (err, results, fields){
-        if(results && results.affectedRows == 1){
-            res.status(200).json({ mensaje: "El usuario se ha agregado"});
-        }
-        else{
-            res.status(400).json({mensaje: "No se pudo agregar el usuario"});
-        }
-    })
-});*/
-
-/*app.post('/canciones1', upload.none(), async (req, res) => {
-    const nombre_cancion = req.body.nombre_cancion;
-    const artista = req.body.artista;
-    const genero = req.body.genero;
-    const disco = req.body.disco;
-    const año_lanzamiento = req.body.año_lanzamiento;
-
-    const script = `INSERT INTO canciones1 (nombre_cancion, artista, genero, disco, año_lanzamiento) VALUES ('${nombre_cancion}', '${artista}', '${genero}', '${disco}', '${año_lanzamiento}')`;
-
-    connection.query(script, function (err, results, fields){
-        if(results && results.affectedRows == 1){
-            res.status(200).json({ mensaje: "El usuario se ha agregado"});
-        }
-        else{
-            res.status(400).json({mensaje: "No se pudo agregar el usuario"});
-        }
-    })
-});*/
 app.post('/canciones1', async (req, res) => {
     const nombre_cancion = req.body.nombre_cancion;
     const artista = req.body.artista;

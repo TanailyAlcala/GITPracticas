@@ -11,23 +11,31 @@
              }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #6df671;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: linear-gradient(to bottom, rgba(15, 207, 121, 0.8) 0%, rgb(130, 244, 82) 100%);
             margin: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
-        form {
+        #formulario-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            width: 100%;
+          
+        }
+        #formulario {
             background-color: #f0ebeb;
             padding: 20px;
             border-radius: 8px;
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
             width: 100%;
+            margin-bottom: 20px;
         }
 
         label {
@@ -41,30 +49,32 @@
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin-bottom: 12px;
         }
 
         button {
             background-color: #4caf50;
             color: white;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
-            align-content: center;
-            justify-content: center;
-            gap: 50px;
+            font-size: 14px;
+            /*align-content: center;
+            justify-content: center;*/
+            /*gap: 50px;*/
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #1aee24;
         }
         
         div {
-            justify-content: center;
+            /*justify-content: center;*/
             margin: 0 auto;
-            font-family: Arial, sans-serif;
-            width: 800px; 
+            font-family: 'Times New Roman', Times, serif;
+            width: 100%; 
+            max-width: 800px;
             height: 400px; 
             position: absolute;
             top: 50%;
@@ -73,14 +83,40 @@
         }
 
         html {
-            background: linear-gradient(to bottom, rgba(207, 15, 15, 0.8) 0%, rgb(94, 38, 38) 100%);
+            background: linear-gradient(to bottom, rgba(18, 207, 15, 0.8) 0%, rgba(147, 244, 146, 0.8) 100%);
+        }
+
+        #btn_pdf {
+            margin-top: 12px;
+        }
+
+        #botones-container {
+            display: flex;
+            /*flex-wrap: wrap;*/
+            gap: 8px;
+            justify-content: center; /* Centra los botones horizontalmente */
+            align-items: center; /* Centra los botones verticalmente */
+        }
+
+        #botones-container button {
+            flex: 1;
+        }
+
+        #botones-container button:last-child {
+            margin-right: 0; /* Eliminar el margen derecho del último botón */
+        }
+
+        @media only screen and (max-width: 600px) {
+            #content-container {
+                padding: 0 20px;
+            }
         }
 
         </style>
 
 </head>
 <body>
-    <div>
+    <div id="formulario-container"> 
     <form id="formulario">
 
         <label for="id_cancion">ID</label>
@@ -103,39 +139,19 @@
 
     </form>
     
+    <div id="botones-container">
     <button type="button" id="btn_peticion">Peticion</button>
     <button type="button" id="btn_delete">Eliminar</button>
     <button type="button" id="btn_insertar">Insertar</button>
     <button type="button" id="btn_modificar">Modificar</button>
     <button type="button" id="btn_pdf">Generar PDF</button>
-    
+    </div>  
     <button onclick="borrarDatos()">Borrar</button>
+
 
     </div>
     <script>
-        /*document.getElementById("btn_peticion").addEventListener("click", async () => {
-            let id_cancion = prompt("ID de la canción");
-            let response = await fetch(`http://localhost:8082/canciones1?id_cancion=${id_cancion}`);
-                
-            let data = await response.json();
-            console.log(data);
-            console.log(data.length);
-    
-            if (data.status === 0) {
-                alert(data.mensaje);
-            }else if (data.length === 0) {
-                alert("El ID solicitado no existe.");
-            } else {
-                console.log(data);
-        
-                document.getElementById("id_cancion").value = data[0].id_cancion;
-                document.getElementById("nombre_cancion").value = data[0].nombre_cancion;
-                document.getElementById("artista").value = data[0].artista;
-                document.getElementById("genero").value = data[0].genero;
-                document.getElementById("disco").value = data[0].disco;
-                document.getElementById("año_lanzamiento").value = data[0].año_lanzamiento;
-            }
-        });*/
+
         document.getElementById("btn_peticion").addEventListener("click", async () => {
     let id_cancion = prompt("ID de la canción");
     try {
@@ -202,14 +218,6 @@ document.getElementById("btn_insertar").addEventListener("click", async () => {
     datos.append('disco', document.getElementById("disco").value);
     datos.append('año_lanzamiento', document.getElementById("año_lanzamiento").value);
 
-    /*console.log(datos.get('id_cancion'))
-    console.log(datos.get('nombre_cancion'))
-    console.log(datos.get('artista'))
-    console.log(datos.get('genero'))
-    console.log(datos.get('disco'))
-    console.log(datos.get('año_lanzamiento'))
-
-    console.log*/
 
     try {
         const response = await fetch("http://localhost:8082/canciones1", {
