@@ -4,25 +4,294 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+
+        html {
+            height: 100%;
+             }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6df671;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #f0ebeb;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            align-content: center;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        div {
+            justify-content: center;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+            width: 800px; 
+            height: 400px; 
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        html {
+            background: linear-gradient(to bottom, rgba(207, 15, 15, 0.8) 0%, rgb(94, 38, 38) 100%);
+        }
+
+        </style>
 
 </head>
 <body>
-        <button type= "button" id="btn_peticion">Peticion</button>
-    <script>
-        try{
-            document.getElementById("btn_peticion").addEventListener("click", async()=> {
-        
-            let response = await fetch("http://localhost:8082");
-    
-            let data = await response.text();
-            console.log(data);
-        } )
-        }
-        catch(error){
-            console.log(error);
-        }
+    <div>
+    <form id="formulario">
 
+        <label for="id_cancion">ID</label>
+        <input type="text" name="id_cancion" id="id_cancion" placeholder="id_cancion">
+
+        <label for="nombre_cancion">NOMBRE DE CANCION</label>
+        <input type="text" name="nombre_cancion" id="nombre_cancion" placeholder="nombre_cancion">
+
+        <label for="artista">ARTISTA</label>
+        <input type="text" name="artista" id="artista" placeholder="artista">
+
+        <label for="genero">GENERO</label>
+        <input type="text" name="genero" id="genero" placeholder="genero">
+
+        <label for="disco">DISCO</label>
+        <input type="text" name="disco" id="disco" placeholder="disco">
+
+        <label for="año_lanzamiento">AÑO DE LANZAMIENTO</label>
+        <input type="text" name="año_lanzamiento" id="año_lanzamiento" placeholder="año_lanzamiento">
+
+    </form>
+    
+    <button type="button" id="btn_peticion">Peticion</button>
+    <button type="button" id="btn_delete">Eliminar</button>
+    <button type="button" id="btn_insertar">Insertar</button>
+    <button type="button" id="btn_modificar">Modificar</button>
+    <button type="button" id="btn_pdf">Generar PDF</button>
+    
+    <button onclick="borrarDatos()">Borrar</button>
+
+    </div>
+    <script>
+        document.getElementById("btn_peticion").addEventListener("click", async () => {
+            let id_cancion = prompt("ID de la canción");
+            let response = await fetch(`http://localhost:8082/canciones1?id_cancion=${id_cancion}`);
+                
+            let data = await response.json();
+            console.log(data);
+            console.log(data.length);
+    
+            if (data.status === 0) {
+                alert(data.mensaje);
+            }else if (data.length === 0) {
+                alert("El ID solicitado no existe.");
+            } else {
+                console.log(data);
         
+                document.getElementById("id_cancion").value = data[0].id_cancion;
+                document.getElementById("nombre_cancion").value = data[0].nombre_cancion;
+                document.getElementById("artista").value = data[0].artista;
+                document.getElementById("genero").value = data[0].genero;
+                document.getElementById("disco").value = data[0].disco;
+                document.getElementById("año_lanzamiento").value = data[0].año_lanzamiento;
+            }
+        });
+
+        document.getElementById("btn_delete").addEventListener("click", async () => {
+            let id_cancion = prompt("ID de la canción que desea eliminar");
+            if (id_cancion !== null) {
+                try {
+                    const response = await fetch(`http://localhost:8082/canciones1?id_cancion=${id_cancion}`, {
+                        method: "DELETE"
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log(data);
+                        alert("Canción eliminada exitosamente.");
+                    } else {
+                        const errorMessage = await response.json();
+                        throw new Error(errorMessage.error || "Error al eliminar la canción.");
+                    }
+                } catch (error) {
+                    console.error("Error al eliminar la canción:", error.message);
+                    alert("Ocurrió un error al eliminar la canción. Por favor, inténtalo de nuevo más tarde.");
+                }
+            }
+        });
+
+    /*document.getElementById("btn_insertar").addEventListener("click", async () => {
+    let datos = new FormData();
+    //datos.append('id_cancion', document.getElementById("id_cancion").value)
+    datos.append('nombre_cancion', document.getElementById("nombre_cancion").value)
+    datos.append('artista', document.getElementById("artista").value)
+    datos.append('genero', document.getElementById("genero").value)
+    datos.append('disco', document.getElementById("disco").value)
+    datos.append('año_lanzamiento', document.getElementById("año_lanzamiento").value)
+
+    console.log(datos.get('id_cancion'))
+    console.log(datos.get('nombre_cancion'))
+    console.log(datos.get('artista'))
+    console.log(datos.get('genero'))
+    console.log(datos.get('disco'))
+    console.log(datos.get('año_lanzamiento'))
+
+    let response = await fetch("http://localhost:8082/canciones1",
+        {
+            method: "POST",
+            headers:{'Content-Type':'application/x-www-form-urlencoded'},
+            body: new URLSearchParams(datos)
+        });
+    let data = await response.json();
+    console.log(data.nombre);
+})*/
+document.getElementById("btn_insertar").addEventListener("click", async () => {
+    const datos = new FormData();
+
+    datos.append('nombre_cancion', document.getElementById("nombre_cancion").value);
+    datos.append('artista', document.getElementById("artista").value);
+    datos.append('genero', document.getElementById("genero").value);
+    datos.append('disco', document.getElementById("disco").value);
+    datos.append('año_lanzamiento', document.getElementById("año_lanzamiento").value);
+
+    /*console.log(datos.get('id_cancion'))
+    console.log(datos.get('nombre_cancion'))
+    console.log(datos.get('artista'))
+    console.log(datos.get('genero'))
+    console.log(datos.get('disco'))
+    console.log(datos.get('año_lanzamiento'))
+
+    console.log*/
+
+    try {
+        const response = await fetch("http://localhost:8082/canciones1", {
+            method: "POST",
+            body: datos  
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            alert("Canción insertada exitosamente.");
+        } else {
+            const errorMessage = await response.json();
+            throw new Error(errorMessage.error || "Error al insertar la canción.");
+        }
+    } catch (error) {
+        console.error("Error al insertar la canción:", error.message);
+        alert("Ocurrió un error al insertar la canción. Por favor, inténtalo de nuevo más tarde.");
+    }
+});
+
+
+document.getElementById("btn_modificar").addEventListener("click", async () => {
+let id_cancion = document.getElementById("id_cancion").value;
+let nombre_cancion= document.getElementById("nombre_cancion").value;
+let artista = document.getElementById("artista").value;
+let genero = document.getElementById("genero").value;
+let disco = document.getElementById("disco").value;
+let año_lanzamiento = document.getElementById("año_lanzamiento").value;
+
+await fetch(`http://localhost:8082/canciones1?id_cancion=${id_cancion}&nombre_cancion=${nombre_cancion}&artista=${artista}&genero=${genero}&disco=${disco}&año_lanzamiento=${año_lanzamiento}`, {method:"PUT"})
+.then(response => response.json())
+.then(data => {
+    if (data.status===1){
+        alert(data.mensaje);
+    }else{
+        alert(data.mensaje);
+    }
+})
+});
+document.getElementById("btn_pdf").addEventListener("click", async () => {
+    const id_cancion = document.getElementById("id_cancion").value;
+    const nombre_cancion = document.getElementById("nombre_cancion").value;
+    const artista = document.getElementById("artista").value;
+    const genero = document.getElementById("genero").value;
+    const disco = document.getElementById("disco").value;
+    const año_lanzamiento = document.getElementById("año_lanzamiento").value;
+
+    const data = {
+        id_cancion,
+        nombre_cancion,
+        artista,
+        genero,
+        disco,
+        año_lanzamiento
+    };
+
+    try {
+        const response = await fetch("http://localhost:8082/canciones1/formato", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            const blob = await response.blob();
+            const archivoPDF = URL.createObjectURL(blob);
+            window.open(archivoPDF);
+        } else {
+            console.error("Error en la solicitud");
+        }
+    } catch (error) {
+        console.error(error);
+    }
+    
+
+});
+
+function borrarDatos() {
+    document.getElementById('id_cancion').value = '';
+    document.getElementById('nombre_cancion').value='';
+    document.getElementById('artista').value='';
+    document.getElementById('genero').value='';
+    document.getElementById('disco').value='';
+    document.getElementById('año_lanzamiento').value='';
+}
+
     </script>
+    
 </body>
 </html>
