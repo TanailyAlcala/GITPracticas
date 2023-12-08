@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <style>
-
-        html {
-            height: 100%;
-             }
-
         body {
             font-family: 'Times New Roman', Times, serif;
             background-color: linear-gradient(to bottom, rgba(15, 207, 121, 0.8) 0%, rgb(130, 244, 82) 100%);
@@ -20,24 +18,13 @@
             min-height: 100vh;
         }
 
-        #formulario-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: center;
-            max-width: 400px;
-            width: 100%;
-            margin-bottom: 20px;
-          
-        }
         #formulario {
             background-color: #f0ebeb;
             padding: 20px;
             border-radius: 8px;
-            font-family: 'Times New Roman', Times, serif;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
             width: 100%;
-            /*margin-bottom: 20px;*/
         }
 
         label {
@@ -57,122 +44,109 @@
         button {
             background-color: #4caf50;
             color: white;
-            padding: 8px 12px;
+            padding: 10px 15px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 14px;
-            /*align-content: center;
-            justify-content: center;*/
-            /*gap: 50px;*/
+            font-size: 16px;
+            margin-right: 8px;
         }
 
         button:hover {
             background-color: #1aee24;
         }
-        
-        div {
-            /*justify-content: center;*/
-            margin: 0 auto;
-            font-family: 'Times New Roman', Times, serif;
-            width: 100%; 
-            max-width: 800px;
-            height: 400px; 
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+
+        /* Estilos para el modal */
+        .modal-content {
+            background-color: rgba(37, 199, 37, 0.5); /* Un color verde transparente como ejemplo */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        html {
-            background: linear-gradient(to bottom, rgba(18, 207, 15, 0.8) 0%, rgba(147, 244, 146, 0.8) 100%);
+        .modal-body {
+            text-align: center;
         }
 
-        #btn_pdf {
-            margin-top: 12px;
+        body.mi-modal-open .mi-modal .modal-content {
+         background-color: green; /* O el color que prefieras */
         }
 
-        #botones-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            /*justify-content: flex-end; */
-            align-items: flex-end; /* Centra los botones verticalmente */
-            margin-top: 12px; /*separar los botones del formulario */
-            margin-right: 20%;
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5) !important;
         }
-
-        #botones-container button {
-            flex: 1;
-            flex-shrink: 0; /* Evita que los botones se contraigan */
-            width: 20%;
-            height: 30px;
-        }
-
-        #botones-container button:last-child {
-            margin-right: 0; /* Eliminar el margen derecho del último botón */
-            flex-shrink: 0;
-        }
-
-        @media only screen and (max-width: 600px) {
-           
-            #content-container {
-                padding: 0 20px;
-            }
-
-            #botones-container {
-                flex-direction: column; /* Cambiado para que los botones se apilen en dispositivos pequeños */
-                align-items: stretch;
-                margin-top: 12px;
-            }
-
-            #botones-container button {
-                margin-bottom: 8px; /* Agregado para separar los botones en dispositivos pequeños */
-            }
-        }
-
-        </style>
-
+    </style>
 </head>
+
 <body>
-    <div id="formulario-container"> 
-    <form id="formulario">
+    <div id="formulario">
+        <form>
 
-        <label for="id_cancion">ID</label>
-        <input type="text" name="id_cancion" id="id_cancion" placeholder="id_cancion">
+            <label for="id_cancion">ID</label>
+            <input type="text" name="id_cancion" id="id_cancion" placeholder="id_cancion">
 
-        <label for="nombre_cancion">NOMBRE DE CANCION</label>
-        <input type="text" name="nombre_cancion" id="nombre_cancion" placeholder="nombre_cancion">
+            <label for="nombre_cancion">NOMBRE DE CANCION</label>
+            <input type="text" name="nombre_cancion" id="nombre_cancion" placeholder="nombre_cancion">
 
-        <label for="artista">ARTISTA</label>
-        <input type="text" name="artista" id="artista" placeholder="artista">
+            <label for="artista">ARTISTA</label>
+            <input type="text" name="artista" id="artista" placeholder="artista">
 
-        <label for="genero">GENERO</label>
-        <input type="text" name="genero" id="genero" placeholder="genero">
+            <label for="genero">GENERO</label>
+            <input type="text" name="genero" id="genero" placeholder="genero">
 
-        <label for="disco">DISCO</label>
-        <input type="text" name="disco" id="disco" placeholder="disco">
+            <label for="disco">DISCO</label>
+            <input type="text" name="disco" id="disco" placeholder="disco">
 
-        <label for="año_lanzamiento">AÑO DE LANZAMIENTO</label>
-        <input type="text" name="año_lanzamiento" id="año_lanzamiento" placeholder="año_lanzamiento">
+            <label for="año_lanzamiento">AÑO DE LANZAMIENTO</label>
+            <input type="text" name="año_lanzamiento" id="año_lanzamiento" placeholder="año_lanzamiento">
 
-    </form>
-    
-    </div>
-    <div id="botones-container">
+        </form>
+
         <button type="button" id="btn_peticion">Peticion</button>
         <button type="button" id="btn_delete">Eliminar</button>
         <button type="button" id="btn_insertar">Insertar</button>
         <button type="button" id="btn_modificar">Modificar</button>
         <button type="button" id="btn_pdf">Generar PDF</button>
+
         <button onclick="borrarDatos()">Borrar</button>
     </div>
-    
-    
-    <script>
 
+    <!-- Modal -->
+    <div class="modal fade mi-modal" id="modalIdCancion" tabindex="-1" role="dialog" aria-labelledby="modalIdCancionLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalIdCancionLabel">ID de la canción</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="modalInputIdCancion" placeholder="ID de la canción">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnModalAceptar">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        //PETICION
         document.getElementById("btn_peticion").addEventListener("click", async () => {
-    let id_cancion = prompt("ID de la canción");
+    // Muestra el modal
+    $('#modalIdCancion').modal('show');
+
+    // Añade un evento al botón del modal
+    document.getElementById("btnModalAceptar").addEventListener("click", async () => {
+    // Obtiene el valor del input en el modal
+    let id_cancion = document.getElementById("modalInputIdCancion").value;
+    
     try {
         const response = await fetch(`http://localhost:8082/canciones1?id_cancion=${id_cancion}`);
         if (!response.ok) {
@@ -201,33 +175,45 @@
         console.error("Error al realizar la petición:", error);
         alert("Ocurrió un error al obtener la canción. Por favor, inténtalo de nuevo más tarde.");
     }
+    });
 });
 
+//DELETE
+        document.getElementById("btn_delete").addEventListener("click", () => {
+        // Muestra el modal
+        $('#modalIdCancion').modal('show');
 
-        document.getElementById("btn_delete").addEventListener("click", async () => {
-            let id_cancion = prompt("ID de la canción que desea eliminar");
-            if (id_cancion !== null) {
-                try {
-                    const response = await fetch(`http://localhost:8082/canciones1?id_cancion=${id_cancion}`, {
-                        method: "DELETE"
-                    });
+        // Añade un evento al botón del modal
+            document.getElementById("btnModalAceptar").addEventListener("click", async () => {
+                // Obtiene el valor del input en el modal
+                let id_cancion = document.getElementById("modalInputIdCancion").value;
 
-                    if (response.ok) {
-                        const data = await response.json();
-                        console.log(data);
-                        alert("Canción eliminada exitosamente.");
-                    } else {
-                        const errorMessage = await response.json();
-                        throw new Error(errorMessage.error || "Error al eliminar la canción.");
+                if (id_cancion !== null && id_cancion !== "") {
+                    try {
+                        const response = await fetch(`http://localhost:8082/canciones1?id_cancion=${id_cancion}`, {
+                            method: "DELETE"
+                        });
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            console.log(data);
+                            alert("Canción eliminada exitosamente.");
+                        } else {
+                            const errorMessage = await response.json();
+                            throw new Error(errorMessage.error || "Error al eliminar la canción.");
+                        }
+                    } catch (error) {
+                        console.error("Error al eliminar la canción:", error.message);
+                        alert("Ocurrió un error al eliminar la canción. Por favor, inténtalo de nuevo más tarde.");
                     }
-                } catch (error) {
-                    console.error("Error al eliminar la canción:", error.message);
-                    alert("Ocurrió un error al eliminar la canción. Por favor, inténtalo de nuevo más tarde.");
                 }
-            }
+
+                // Cierra el modal después de realizar la acción
+                $('#modalIdCancion').modal('hide');
+            });
         });
 
-
+//INSERTAR
 document.getElementById("btn_insertar").addEventListener("click", async () => {
     const datos = new FormData();
 
@@ -258,7 +244,7 @@ document.getElementById("btn_insertar").addEventListener("click", async () => {
     }
 });
 
-
+//MODIFICAR
 document.getElementById("btn_modificar").addEventListener("click", async () => {
 let id_cancion = document.getElementById("id_cancion").value;
 let nombre_cancion= document.getElementById("nombre_cancion").value;
@@ -277,6 +263,8 @@ await fetch(`http://localhost:8082/canciones1?id_cancion=${id_cancion}&nombre_ca
     }
 })
 });
+
+//PDF
 document.getElementById("btn_pdf").addEventListener("click", async () => {
     const id_cancion = document.getElementById("id_cancion").value;
     const nombre_cancion = document.getElementById("nombre_cancion").value;
@@ -317,6 +305,7 @@ document.getElementById("btn_pdf").addEventListener("click", async () => {
 
 });
 
+//BORRAR DATOS
 function borrarDatos() {
     document.getElementById('id_cancion').value = '';
     document.getElementById('nombre_cancion').value='';
@@ -327,6 +316,6 @@ function borrarDatos() {
 }
 
     </script>
-    
 </body>
+
 </html>
